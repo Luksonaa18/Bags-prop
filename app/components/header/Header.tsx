@@ -87,7 +87,7 @@ const Header = () => {
             </div>
           </div>
         </nav>
-        <Cart />
+        <Cart cart={cart} onClose={() => setCart((prev) => !prev)} />
         <Menu isOpen={isOpen} onClose={() => setIsOpen((prev) => !prev)} />
       </header>
       <FloatingDock

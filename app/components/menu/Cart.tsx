@@ -5,8 +5,7 @@ import { IoClose } from "react-icons/io5";
 import Image from "next/image";
 import { useBagStore } from "@/zustand/zustand";
 
-const Cart = () => {
-  const [cart, setCart] = useState(false);
+const Cart = ({ cart, onClose }: { cart: boolean; onClose: () => void }) => {
   const bags = useBagStore((state) => state.bags);
   return (
     <AnimatePresence>
@@ -22,7 +21,7 @@ const Cart = () => {
           <div className="flex justify-end p-4">
             <IoClose
               className="text-3xl cursor-pointer text-gray-700"
-              onClick={() => setCart(false)}
+              onClick={onClose}
             />
           </div>
 

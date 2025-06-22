@@ -17,7 +17,7 @@ type Bag = {
 
 const Shop = () => {
   const { addBag } = useBagStore();
-  const [bags, setBags] = useState<Bag[]>([
+  const [bags] = useState<Bag[]>([
     {
       id: uuidv4(),
       name: "Luxury Tote",
@@ -94,12 +94,24 @@ const Shop = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
-    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, stiffness: 120 } },
-    hover: { scale: 1.05, boxShadow: "0 8px 20px rgba(0,0,0,0.15)" },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring" as const, stiffness: 120 },
+    },
+    hover: {
+      scale: 1.05,
+      boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+    },
   };
 
   const buttonVariants = {
-    hover: { scale: 1.1, backgroundColor: "#111", transition: { duration: 0.3 } },
+    hover: {
+      scale: 1.1,
+      backgroundColor: "#111",
+      transition: { duration: 0.3 },
+    },
     tap: { scale: 0.95 },
   };
 
@@ -118,8 +130,7 @@ const Shop = () => {
             className="border p-4 rounded-lg flex flex-col items-center shadow-md bg-white"
             variants={cardVariants}
             whileHover="hover"
-            initial="hidden"
-            animate="show"
+            style={{ willChange: "transform, opacity" }}
           >
             <h2 className="text-xl font-bold mb-2">{bag.name}</h2>
             <Image
@@ -128,7 +139,7 @@ const Shop = () => {
               width={240}
               height={240}
               className="object-contain rounded-md mb-4"
-              priority={false}
+              loading="lazy"
             />
             <p className="text-gray-700 font-semibold mb-4">${bag.price}</p>
             <motion.button
@@ -137,6 +148,7 @@ const Shop = () => {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
+              style={{ willChange: "transform" }}
               type="button"
             >
               Add to Cart

@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { useBagStore } from "@/zustand/zustand";
 import Image from "next/image";
 import { FloatingDock } from "../ui/floating-dock";
-import { IconShoppingBag, IconUser } from "@tabler/icons-react";
+import { IconShoppingBag } from "@tabler/icons-react";
 
 const menuContainer = {
   hidden: { opacity: 0 },
@@ -46,7 +46,6 @@ const Header = () => {
   const [cart, setCart] = useState(false);
   const router = useRouter();
   const bags = useBagStore((state) => state.bags);
-  const totalQuantity = bags.reduce((sum, bag) => sum + bag.quantity, 0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,12 +54,9 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
   return (
@@ -109,9 +105,12 @@ const Header = () => {
             </div>
           </div>
         </nav>
-        {cart && (
-          <AnimatePresence>
+
+        {/* CART DRAWER */}
+        <AnimatePresence>
+          {cart && (
             <motion.div
+              style={{ willChange: "opacity, transform" }}
               initial={{ opacity: 0, x: -300 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -300 }}
@@ -132,7 +131,13 @@ const Header = () => {
                     className="border p-4 rounded-lg items-center flex flex-col shadow-md"
                   >
                     <h2 className="text-xl font-bold">{bag.name}</h2>
-                    <Image src={bag.image} alt={bag.name} />
+                    <Image
+                      src={bag.image}
+                      alt={bag.name}
+                      width={150}
+                      height={150}
+                      loading="lazy"
+                    />
                     <p className="text-gray-700">${bag.price}</p>
                     <p className="text-sm text-gray-500">
                       Quantity: {bag.quantity}
@@ -141,15 +146,18 @@ const Header = () => {
                 ))}
               </main>
             </motion.div>
-          </AnimatePresence>
-        )}
+          )}
+        </AnimatePresence>
+
+        {/* MENU DRAWER */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
+              style={{ willChange: "opacity, transform" }}
               key="menu"
               initial={{ opacity: 0, x: -300 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, y: -300 }}
+              exit={{ opacity: 0, x: -300 }}
               transition={{ type: "tween", duration: 0.3 }}
               className="absolute top-0 left-0 w-full h-screen bg-white p-6 z-50"
             >
@@ -161,13 +169,14 @@ const Header = () => {
               </div>
 
               <motion.div
+                style={{ willChange: "opacity, transform" }}
                 variants={menuContainer}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
                 className="flex flex-col gap-6 text-gray-900 text-lg font-medium"
               >
-                {/* Shop Section */}
+                {/* SHOP */}
                 <div className="space-y-2">
                   <motion.span
                     variants={menuItem}
@@ -178,6 +187,7 @@ const Header = () => {
                   {["All Products", "Best Deals", "New Arrivals"].map(
                     (text) => (
                       <motion.div
+                        style={{ willChange: "opacity, transform" }}
                         key={text}
                         variants={menuItem}
                         className="flex items-center gap-2"
@@ -189,7 +199,7 @@ const Header = () => {
                   )}
                 </div>
 
-                {/* Info Section */}
+                {/* INFO */}
                 <div className="space-y-2">
                   <motion.span
                     variants={menuItem}
@@ -199,6 +209,7 @@ const Header = () => {
                   </motion.span>
                   {["About Us", "Shipping & Returns"].map((text) => (
                     <motion.div
+                      style={{ willChange: "opacity, transform" }}
                       key={text}
                       variants={menuItem}
                       className="flex items-center gap-2"
@@ -209,6 +220,7 @@ const Header = () => {
                   ))}
                 </div>
 
+                {/* CONTACT */}
                 <div className="space-y-2">
                   <motion.span
                     variants={menuItem}
@@ -217,6 +229,7 @@ const Header = () => {
                     CONTACT
                   </motion.span>
                   <motion.div
+                    style={{ willChange: "opacity, transform" }}
                     variants={menuItem}
                     className="flex items-center gap-4"
                   >
@@ -230,6 +243,8 @@ const Header = () => {
           )}
         </AnimatePresence>
       </header>
+
+      {/* FLOATING NAVBAR */}
       <FloatingDock
         items={[
           {

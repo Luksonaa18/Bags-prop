@@ -9,7 +9,13 @@ import {
   IoLogoTwitter,
 } from "react-icons/io5";
 
-const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const Menu = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -74,4 +80,4 @@ const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => 
   );
 };
 
-export default Menu;
+export default React.memo(Menu);

@@ -113,8 +113,8 @@ const Header = () => {
             href: "/wishlist",
           },
         ]}
-        desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 text-white "
-        mobileClassName="fixed bottom-4 right-4 z-50 text-white flex items-center justify-center "
+        desktopClassName="fixed bottom-4 right-0 -translate-x-1/2 z-50 text-white "
+        mobileClassName="fixed bottom-4 right-4 z-50 text-white flex items-center justify-center"
       />
     </>
   );

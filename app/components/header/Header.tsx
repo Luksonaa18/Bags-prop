@@ -19,26 +19,8 @@ import { useBagStore } from "@/zustand/zustand";
 import Image from "next/image";
 import { FloatingDock } from "../ui/floating-dock";
 import { IconShoppingBag } from "@tabler/icons-react";
-
-const menuContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: { staggerChildren: 0.1, staggerDirection: -1 },
-  },
-};
-
-const menuItem = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -20 },
-};
+import Menu from "../menu/Menu";
+import Cart from "../menu/Cart";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,146 +87,9 @@ const Header = () => {
             </div>
           </div>
         </nav>
-
-        {/* CART DRAWER */}
-        <AnimatePresence>
-          {cart && (
-            <motion.div
-              style={{ willChange: "opacity, transform" }}
-              initial={{ opacity: 0, x: -300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ type: "tween", duration: 0.3 }}
-              className="fixed top-0 left-0 w-full h-screen bg-white z-40 flex flex-col"
-            >
-              <div className="flex justify-end p-4">
-                <IoClose
-                  className="text-3xl cursor-pointer text-gray-700"
-                  onClick={() => setCart(false)}
-                />
-              </div>
-
-              <main className="flex-1 overflow-y-auto p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {bags.map((bag) => (
-                  <div
-                    key={bag.id}
-                    className="border p-4 rounded-lg items-center flex flex-col shadow-md"
-                  >
-                    <h2 className="text-xl font-bold">{bag.name}</h2>
-                    <Image
-                      src={bag.image}
-                      alt={bag.name}
-                      width={150}
-                      height={150}
-                      loading="lazy"
-                    />
-                    <p className="text-gray-700">${bag.price}</p>
-                    <p className="text-sm text-gray-500">
-                      Quantity: {bag.quantity}
-                    </p>
-                  </div>
-                ))}
-              </main>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* MENU DRAWER */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              style={{ willChange: "opacity, transform" }}
-              key="menu"
-              initial={{ opacity: 0, x: -300 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -300 }}
-              transition={{ type: "tween", duration: 0.3 }}
-              className="absolute top-0 left-0 w-full h-screen bg-white p-6 z-50"
-            >
-              <div className="flex justify-end mb-6">
-                <IoClose
-                  className="text-3xl cursor-pointer text-gray-700"
-                  onClick={() => setIsOpen(false)}
-                />
-              </div>
-
-              <motion.div
-                style={{ willChange: "opacity, transform" }}
-                variants={menuContainer}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="flex flex-col gap-6 text-gray-900 text-lg font-medium"
-              >
-                {/* SHOP */}
-                <div className="space-y-2">
-                  <motion.span
-                    variants={menuItem}
-                    className="text-gray-500 text-sm"
-                  >
-                    SHOP
-                  </motion.span>
-                  {["All Products", "Best Deals", "New Arrivals"].map(
-                    (text) => (
-                      <motion.div
-                        style={{ willChange: "opacity, transform" }}
-                        key={text}
-                        variants={menuItem}
-                        className="flex items-center gap-2"
-                      >
-                        <FaShoppingBag />
-                        <span>{text}</span>
-                      </motion.div>
-                    )
-                  )}
-                </div>
-
-                {/* INFO */}
-                <div className="space-y-2">
-                  <motion.span
-                    variants={menuItem}
-                    className="text-gray-500 text-sm"
-                  >
-                    INFORMATION
-                  </motion.span>
-                  {["About Us", "Shipping & Returns"].map((text) => (
-                    <motion.div
-                      style={{ willChange: "opacity, transform" }}
-                      key={text}
-                      variants={menuItem}
-                      className="flex items-center gap-2"
-                    >
-                      <FaInfoCircle />
-                      <span>{text}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* CONTACT */}
-                <div className="space-y-2">
-                  <motion.span
-                    variants={menuItem}
-                    className="text-gray-500 text-sm"
-                  >
-                    CONTACT
-                  </motion.span>
-                  <motion.div
-                    style={{ willChange: "opacity, transform" }}
-                    variants={menuItem}
-                    className="flex items-center gap-4"
-                  >
-                    <IoLogoFacebook className="text-3xl cursor-pointer hover:text-yellow-500" />
-                    <IoLogoInstagram className="text-3xl cursor-pointer hover:text-yellow-500" />
-                    <IoLogoTwitter className="text-3xl cursor-pointer hover:text-yellow-500" />
-                  </motion.div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <Cart />
+        <Menu />
       </header>
-
-      {/* FLOATING NAVBAR */}
       <FloatingDock
         items={[
           {

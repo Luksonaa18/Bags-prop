@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
+import React from "react";
 import { FaShoppingBag, FaInfoCircle } from "react-icons/fa";
 import {
   IoClose,
@@ -8,27 +8,8 @@ import {
   IoLogoInstagram,
   IoLogoTwitter,
 } from "react-icons/io5";
-const menuContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: { staggerChildren: 0.1, staggerDirection: -1 },
-  },
-};
 
-const menuItem = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -20 },
-};
-const Menu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -44,7 +25,7 @@ const Menu = () => {
           <div className="flex justify-end mb-6">
             <IoClose
               className="text-3xl cursor-pointer text-gray-700"
-              onClick={() => setIsOpen(false)}
+              onClick={onClose}
             />
           </div>
 

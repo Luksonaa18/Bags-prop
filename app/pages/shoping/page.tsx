@@ -118,7 +118,7 @@ const Shop = () => {
   return (
     <>
       <Header />
-      
+
       <motion.main
         className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-20"
         variants={containerVariants}
@@ -145,7 +145,7 @@ const Shop = () => {
             <p className="text-gray-700 font-semibold mb-4">${bag.price}</p>
             <motion.button
               onClick={() => addBag(bag)}
-              className="px-6 py-2 bg-black text-white rounded-md"
+              className="px-6 py-2 bg-black text-white rounded-md cursor-pointer"
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"

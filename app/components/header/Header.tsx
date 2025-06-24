@@ -49,8 +49,9 @@ const Header = () => {
         }`}
       >
         <nav className="flex flex-row items-center p-4 justify-between">
+        
           <IoMenu
-            className={`font-semibold cursor-pointer text-2xl ${
+            className={`font-semibold cursor-pointer text-2xl lg:hidden ${
               scrolled ? "text-black" : "text-white"
             }`}
             onClick={() => setIsOpen((prev) => !prev)}
@@ -64,7 +65,7 @@ const Header = () => {
           </h1>
           <div className="flex flex-row items-center gap-2">
             <FaInstagram
-              className={`font-semibold text-lg ${
+              className={`font-semibold text-lg cursor-pointer ${
                 scrolled ? "text-black" : "text-white"
               }`}
             />
@@ -106,11 +107,6 @@ const Header = () => {
             title: "Profile",
             icon: <IoInformation size={20} />,
             href: "/pages/about",
-          },
-          {
-            title: "Wishlist",
-            icon: <IoHeart size={20} />,
-            href: "/wishlist",
           },
         ]}
         desktopClassName="fixed bottom-4 right-0 -translate-x-1/2 z-50 text-white "

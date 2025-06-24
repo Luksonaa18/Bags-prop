@@ -59,7 +59,7 @@ const Cart = ({ cart, onClose }: { cart: boolean; onClose: () => void }) => {
 
                     <button
                       onClick={() => remove(bag.id)}
-                      className="mt-4 flex items-center gap-2 px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition"
+                      className="mt-4 flex items-center cursor-pointer gap-2 px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition"
                     >
                       <IoTrash />
                       Remove
@@ -89,7 +89,7 @@ const Cart = ({ cart, onClose }: { cart: boolean; onClose: () => void }) => {
               No Items in Cart
               <button
                 onClick={handleRouteChange}
-                className="w-30 h-11 text-white rounded-lg border-1 bg-blue-500 font-bold "
+                className="w-30 h-11 text-white cursor-pointer rounded-lg border-1 bg-blue-500 font-bold "
               >
                 Shop Now
               </button>

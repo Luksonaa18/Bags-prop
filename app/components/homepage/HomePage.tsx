@@ -12,14 +12,13 @@ const HomePage = () => {
       <div className="lg:hidden ">
         <Image alt="image" src={Image1} />
       </div>
-      <div className="hidden lg:block ">
+      <div className="hidden lg:block mb-5">
         <Image alt="image" src={Image2} />
       </div>
-      <Content/>
+      <Content />
       <Footer />
     </>
   );
-  
 };
 
 export default HomePage;

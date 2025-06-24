@@ -4,7 +4,7 @@ import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6 mt-12"> 
+    <footer className="bg-gray-800 text-white py-6 mt-12 w-full"> 
       <div className="max-w-screen-xl mx-auto px-6 text-center">
         <p className="text-lg">Your stylish bags, delivered to you.</p>
         <div className="flex justify-center gap-4 mt-4">

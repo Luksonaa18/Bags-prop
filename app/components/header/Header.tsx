@@ -105,7 +105,7 @@ const Header = () => {
           {
             title: "Profile",
             icon: <IoInformation size={20} />,
-            href: "/about",
+            href: "/pages/about",
           },
           {
             title: "Wishlist",

@@ -1,12 +1,12 @@
 "use client";
 import Footer from "@/app/components/footer/Footer";
 import Header from "@/app/components/header/Header";
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useBagStore } from "../../../zustand/zustand";
-import image from "../../../public/luxury-work-bag-demellier-maxi-montreal.png";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import image from "../../../public/luxury-work-bag-demellier-maxi-montreal.png";
+import { useBagStore } from "../../../zustand/zustand";
 
 type Bag = {
   name: string;

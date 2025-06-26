@@ -1,26 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import {
-  IoClose,
-  IoHeart,
-  IoHome,
-  IoInformation,
-  IoLogoFacebook,
-  IoLogoInstagram,
-  IoLogoTwitter,
-  IoMenu,
-} from "react-icons/io5";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiShoppingBag } from "react-icons/fi";
+import { useEffect, useState } from "react";
 import { FaInstagram } from "react-icons/fa";
-import { FaShoppingBag, FaInfoCircle } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { FiShoppingBag } from "react-icons/fi";
+import { IoHome, IoInformation, IoMenu } from "react-icons/io5";
+
 import { useBagStore } from "@/zustand/zustand";
-import Image from "next/image";
-import { FloatingDock } from "../ui/floating-dock";
 import { IconShoppingBag } from "@tabler/icons-react";
-import Menu from "../menu/Menu";
+import { useRouter } from "next/navigation";
 import Cart from "../menu/Cart";
+import Menu from "../menu/Menu";
+import { FloatingDock } from "../ui/floating-dock";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +38,6 @@ const Header = () => {
         }`}
       >
         <nav className="flex flex-row items-center p-4 justify-between">
-        
           <IoMenu
             className={`font-semibold cursor-pointer text-2xl lg:hidden ${
               scrolled ? "text-black" : "text-white"

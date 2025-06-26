@@ -13,9 +13,12 @@ type BagStore = {
   addBag: (bag: Omit<Bag, "quantity">) => void;
   removeBag: (id: string) => void;
   clearCart: () => void;
+  getTotalPrice: () => number;
+  getTotalItems: () => number;
+  updateQuantity: (id: string, quantity: number) => void;
 };
 
-export const useBagStore = create<BagStore>((set) => ({
+export const useBagStore = create<BagStore>((set, get) => ({
   bags: [],
   addBag: (newBag) =>
     set((state) => {
@@ -36,5 +39,26 @@ export const useBagStore = create<BagStore>((set) => ({
     set((state) => ({
       bags: state.bags.filter((bag) => bag.id !== id),
     })),
+  updateQuantity: (id, quantity) =>
+    set((state) => {
+      if (quantity <= 0) {
+        return {
+          bags: state.bags.filter((bag) => bag.id !== id),
+        };
+      }
+      return {
+        bags: state.bags.map((bag) =>
+          bag.id === id ? { ...bag, quantity } : bag
+        ),
+      };
+    }),
   clearCart: () => set({ bags: [] }),
+  getTotalPrice: () => {
+    const { bags } = get();
+    return bags.reduce((total, bag) => total + (bag.price * bag.quantity), 0);
+  },
+  getTotalItems: () => {
+    const { bags } = get();
+    return bags.reduce((total, bag) => total + bag.quantity, 0);
+  },
 }));

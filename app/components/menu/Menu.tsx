@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { FaShoppingBag, FaInfoCircle } from "react-icons/fa";
+import { FaInfoCircle, FaShoppingBag } from "react-icons/fa";
 import {
   IoClose,
   IoLogoFacebook,

@@ -1,14 +1,15 @@
 "use client";
-import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect } from "react";
-import { IoClose, IoTrash } from "react-icons/io5";
-import Image from "next/image";
 import { useBagStore } from "@/zustand/zustand";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { IoClose, IoTrash } from "react-icons/io5";
 
 const Cart = ({ cart, onClose }: { cart: boolean; onClose: () => void }) => {
   const bags = useBagStore((state) => state.bags);
   const remove = useBagStore((state) => state.removeBag);
+  const totalprice = useBagStore((state) => state.getTotalPrice);
   useEffect(() => {
     document.body.style.overflow = cart ? "hidden" : "auto";
   }, [cart]);
@@ -52,18 +53,22 @@ const Cart = ({ cart, onClose }: { cart: boolean; onClose: () => void }) => {
                       height={150}
                       loading="lazy"
                     />
-                    <p className="text-gray-700">${bag.price}</p>
+                    Price :{totalprice() + "$"}
                     <p className="text-sm text-gray-500">
                       Quantity: {bag.quantity}
                     </p>
-
-                    <button
-                      onClick={() => remove(bag.id)}
-                      className="mt-4 flex items-center cursor-pointer gap-2 px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition"
-                    >
-                      <IoTrash />
-                      Remove
-                    </button>
+                    <div className=" flex flex-row items-center gap-4">
+                      <button
+                        onClick={() => remove(bag.id)}
+                        className="mt-4 flex items-center cursor-pointer gap-2 px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition"
+                      >
+                        <IoTrash />
+                        Remove
+                      </button>
+                      <button className="mt-4 flex items-center cursor-pointer gap-2 px-4 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200 transition">
+                        Buy
+                      </button>
+                    </div>
                   </div>
                 ))}
               </main>

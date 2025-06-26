@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import founderImage from "@/public/bag1.jpeg";  
+import founderImage from "@/public/bag1.jpeg";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const AboutUs = () => {
@@ -45,7 +44,7 @@ const AboutUs = () => {
             </button>
           </motion.div>
 
-          {/* Image Section */}
+          
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
